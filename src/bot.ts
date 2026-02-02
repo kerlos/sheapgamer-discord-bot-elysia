@@ -85,14 +85,14 @@ export class DiscordBot {
             if (message.author.bot) return;
             if (!message.member?.permissions.has(PermissionsBitField.Flags.Administrator)) return;
 
-            if (message.content === '!setnews') {
+            if (message.content === '!subscribe_sheapgamer') {
                 this.saveSubscription(message.guildId!, message.channelId);
                 await message.channel.send(`✅ วาริรินตั้งค่าช่องข่าวสารแล้วค่ะ ช่องข่าวสารคือ <#${message.channelId}> จะโพสต์ข่าวสารที่นี่ค่ะ`);
             }
 
-            if (message.content === '!unsentnews') {
+            if (message.content === '!unsubscribe_sheapgamer') {
                 if (this.removeSubscription(message.guildId!)) {
-                    await message.channel.send("✅ วาริรินยกเลิกการตั้งค่าช่องข่าวสารแล้วค่ะ");
+                    await message.channel.send("✅ วาริรินยกเลิกการตั้งค่าช่องข่าวสารของเซิร์ฟเวอร์แล้วค่ะ");
                 } else {
                     await message.channel.send("ℹ️ ยังไม่มีการตั้งค่าช่องข่าวสารค่ะ");
                 }
