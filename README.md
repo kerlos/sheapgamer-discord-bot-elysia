@@ -2,66 +2,62 @@
 
 A simple Discord bot rewritten in TypeScript using Bun and ElysiaJS.
 
-### Features
+### Features 🚀
 
-Stack: Bun + ElysiaJS + Discord.js.
+- Stack: Bun + ElysiaJS + Discord.js.
 
-Functionality: Polls RSS feed every 20 minutes and posts updates to Discord.
+- Polls RSS feed every 20 minutes and posts updates to Discord.
 
-Web Server: Includes a health check endpoint via Elysia at http://localhost:3000 (useful for cloud health checks).
+- Can monitor a specific YouTube channel for new Videos, Shorts, and Live streams.
 
-Persistence: Uses local JSON files to track news state and channel subscriptions.
+- Includes a health check endpoint via Elysia at http://localhost:3000 (useful for cloud health checks).
+- Uses local JSON files to track news state and channel subscriptions.
 
 ## Setup
 
-1. Prerequisites
 
-Bun installed `(curl -fsSL https://bun.sh/install | bash)`.
+### Prerequisites
 
-A Discord Bot Token.
+- Bun installed `(curl -fsSL https://bun.sh/install | bash)`.
+- A Discord Bot Token.
 
-2. Installation
 
-Install dependencies:
+### Installation
 
-`bun install`
+- Install dependencies:
 
-Create a .env file:
+  `bun install`
+
+- Create a .env file:
 ```
 DISCORD_TOKEN=your_token_here
 RSS_URL=https://rss.app/feeds/sadasd.xml
+YOUTUBE_CHANNEL_ID=UCOsdaswsds
 ```
 
-3. Running Locally
+- Running Locally
 
-Start the bot and the web server:
-
-`bun start`
+  `bun start`
 
 
 ## Cloud Deployment: Railway (Recommended)
 
-Create Project: Connect your GitHub repository to Railway.
+-  Connect your GitHub repository to Railway.
 
-Variables: Add DISCORD_TOKEN and RSS_URL in the "Variables" tab.
+- Add DISCORD_TOKEN and RSS_URL in the "Variables" tab.
 
-Persistence (Crucial):
+### Persistence (Crucial):
 
-Go to the Volumes tab in your service.
+- Go to the Volumes in your service.
+- Click "Add Volume".
+- Set the Mount Path to /app/data.
+- This ensures channels.json and news_state.json are saved to a virtual disk. Without this, your bot will lose all data every time you redeploy.
 
-Click "Add Volume".
-
-Set the Mount Path to /app/data.
-
-Why? This ensures channels.json and news_state.json are saved to a virtual disk. Without this, your bot will lose all data every time you redeploy.
-
-Health Check:
+### Health Check:
 
 Railway may automatically detect the web server.
 
-You can explicitly set the Healthcheck Path to /health in Settings -> Deploy.
-
-
+You can explicitly set the Healthcheck Path to `/health` in `Settings -> Deploy`.
 
 
 ## Docker Deployment
@@ -71,9 +67,7 @@ You can explicitly set the Healthcheck Path to /health in Settings -> Deploy.
 `docker build -t rss-bot-elysia`
 
 
-2. Run with Persistence
-
-You must mount a volume to save channels.json and news_state.json, otherwise the bot will forget its settings on restart.
+2. Run with Persistence - You must mount a volume to save channels.json and news_state.json, otherwise the bot will forget its settings on restart.
 
 Linux / Mac / PowerShell:
 
